@@ -26,3 +26,9 @@ In our analysis, we aim to employ the steps in Python characterized below:
 ## Computer science
 
 ### Installation and requirements
+
+### Sources of code
+#### Online 
+- https://www.geeksforgeeks.org/python/extract-dictionary-value-from-column-in-data-frame/
+- 
+#### GitHub repositories
