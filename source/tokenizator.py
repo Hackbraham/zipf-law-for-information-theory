@@ -24,7 +24,7 @@ def tag_paragraph_with_spacy(doc) -> list:
                 token.is_space or
                 not token.is_alpha or
                 len(token.text) <= 2) and custom_stopwords(token):
-            clean_tokens.append(token.lemma_)
+            clean_tokens.append(token.lemma_.lower())
 
     return clean_tokens
 
