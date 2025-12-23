@@ -29,7 +29,7 @@ def tag_paragraph_with_spacy(doc):
     return clean_tokens
 
 
-def tag_csvfile_with_spacy(file_path: str, nlp: spacy.language.Language, column_name: str) -> pd.DataFrame:
+def tag_csvfile_with_spacy(file_path: str, nlp: spacy.language.Language, column_names: list) -> pd.DataFrame:
     """
     Cleans unwanted spacy tags from a csv file and returns lemmas.
     :return: pandas.DataFrame
@@ -45,14 +45,17 @@ def tag_csvfile_with_spacy(file_path: str, nlp: spacy.language.Language, column_
     # open csv in pandas
     df = pd.read_csv(file_path, delimiter=';')
 
-    # add clean text column for lemmas
-    df[column_name +'_clean'] = None
+    for col in column_names:
+        # add clean text column for lemmas
+        new_col = col +'_clean'
+        df[new_col] = None
 
-    # iterate though rows and make a clean representation
-    for index, row in df[column_name].iterrows():
-        doc = nlp(row)
-        clean_tokens = tag_paragraph_with_spacy(doc)
-        df.at[index, 'Clean Text'] = clean_tokens
+        # iterate though rows and make a clean representation
+        for index, row in df[col].iterrows():
+            doc = nlp(row)
+            clean_tokens = tag_paragraph_with_spacy(doc)
+            df.at[index, new_col] = clean_tokens # save the result
     return df
+
 
 
