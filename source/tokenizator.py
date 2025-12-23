@@ -1,8 +1,6 @@
 import os
-import re
 import spacy
 import pandas as pd
-from scipy.stats import false_discovery_control
 
 
 def tag_paragraph_with_spacy(doc) -> list:
@@ -52,12 +50,10 @@ def tag_df_with_spacy(df, nlp: spacy.language.Language, column_names: list) -> p
         # add clean text column for lemmas
         new_name = column +'_clean'
         df[new_name] = None
+        df[new_name] = df[new_name].astype(object) # to hold lists
 
-        # iterate though rows and make a clean representation
-        for index, text in df[column].items():
-            doc = nlp(text)
-            clean_tokens = tag_paragraph_with_spacy(doc)
-            df.at[index, new_name] = [clean_tokens]
+        # use lambda instead of for loop to avoid len-type error
+        df[new_name] = df[column].apply(lambda x: tag_paragraph_with_spacy(nlp(str(x))))
     return df
 
 
