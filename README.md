@@ -26,6 +26,17 @@ In our analysis, we aim to employ the steps in Python characterized below:
 ## Computer science
 
 ### Installation and requirements
+To use spacy, you have to install the **spacy** package (via pip) 
+
+`pip install spacy`
+
+and download **en_core_web_sm** spacy model (tokenization)
+
+`python -m spacy download en_core_web_sm`
+
+Other dependencies can be downloaded with this command:
+
+`pip install -r /your/path/to/requirements.txt`
 
 ### Sources of code
 #### Online 
